@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{%block content%}
+<style>
+body{
+background-repeat:no-repeat;
+-webkit-background-size:cover;
+-moz-background-size:cover;
+-o-background-size:cover;
+background-size:cover;
+background-position:center;
+ 
+}
+footer
+{
+ bottom:0;
+}
+</style>
+<body background="{{ url_for('static', filename='img/vegan.jpg') }}">
+</body>
+
+ {% endblock %}
+
+
+

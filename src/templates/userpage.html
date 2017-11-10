@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{%block content%}
+
+   
+
+      
+    	
+
+  
+{%if users%}
+    <div class="users">
+      <h2>You are now registered</h2>
+      <table style="width:100%;">
+        {%for users in users%}
+          <tr>
+            <td>{{users}}</td>
+          </tr>   
+        {%endfor%}
+      </table>
+    </div>
+    {%endif%}
+{% endblock %}
