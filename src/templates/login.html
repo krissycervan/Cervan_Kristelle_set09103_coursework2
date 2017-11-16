@@ -7,7 +7,10 @@
     	<div class="box">
   			<h1>Log In</h1>
 			<br>
-  			<form action="/login" method="POST">
+			 {%if error%}
+    <div class="error"><strong>Error:</strong> {{ error }}
+	{%endif%}
+  			<form action="" method="POST">
 			
     			<input type="text" name="username" id="username" value="{{
           request.form.username }}" placeholder="Username" required/>
@@ -16,18 +19,19 @@
           request.form.password }}" placeholder="Password" required/>
     			<br><br><br>
     			<input type="submit" class="button" value="Log In"/>
+				<br>
+				{% for message in get_flashed_messages() %}
+		 <div class=flash>
+		  {{ message }}
+		  </div>
+		 {% endfor %}
+		 
+		 
   			</form>
 		</div>
+		
 
-  
-{%if error%}
-    <div class="users">
-      <h2>You are now registered</h2>
-      <table style="width:100%;">
-  
-        <p class="error"><strong>Error:</strong> {{ error }}
-   
-      </table>
-    </div>
-    {%endif%}
+
+     
+    
 {% endblock %}

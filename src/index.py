@@ -1,13 +1,22 @@
 #python flask
 from flask import Flask, render_template, url_for, abort, request, redirect, g
-import json
-import models as dbHandler
+from flask import *
+from functools import wraps
+import sqlite3
 app = Flask(__name__)
+app.secret_key = 'hello123'
+app.database = 'var/vegan.db'
+
+# -*- coding: utf-8 -*-
+
 #"print" will allow to show it to the html page.
 #"routes" are for mapping URLs to application actions, and conversely to generate URLs
 #"def" define a function
 # "with" Use file to refer to the file object
 #"in" is used to look inside an object.
+
+
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -17,51 +26,75 @@ def index():
 def about():
 #redirect to url 
  return render_template('about.html'), 200
-@app.route('/')
-@app.route('/index')
+@app.route('/frozen')
+def frozen():
+#redirect to url 
+ return render_template('frozen.html'), 200
+ 
+ 
+#asks the user that login is required
+
+def login_required(test):
+ @wraps(test)
+ def wrap(*args, **kwargs):
+  if 'logged_in' in session:
+   return test(*args, **kwargs)
+  else:
+   flash('login required')
+   return redirect(url_for('login'))
+ return wrap
+ 
+#logout 
+@app.route('/logout')
+def logout():
+ session.pop('logged_in', None)
+ flash('You are now logged out!')
+ return redirect(url_for('login'))
+ 
+ 
+def connect_db():
+ return sqlite3.connect(app.database) 
+
+@app.route('/hello', methods=['GET','POST'])
+@login_required
+def hello():
+ if request.method == 'POST':
+  title = request.form['title'] 
+  ingredients = request.form['ingredients']
+  instructions = request.form['instructions']
+  g.db = connect_db()
+  cur = g.db.execute("insert into veganfood values(NOT NULL,?,?,?, NOT NULL)", (title,ingredients, instructions))
+  g.db.close()
+
+ g.db = connect_db()
+ cur = g.db.execute("select * from veganfood")
+ veganfood = [dict(title=row[1], ingredients=row[2], instructions=row[3]) for row in cur.fetchall()]
+ g.db.close()
+ return render_template('hello.html', veganfood=veganfood)
+ 
+@app.route('/bakery')
+def bakery():
+#redirect to url 
+ return render_template('bakery.html'), 200
+
+ 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
  error = None
  if request.method == 'POST':
-  username = request.form['username']
-  password = request.form['password']
-  completion = validate(username, password)
-  if completion ==False:
-   error = 'Invalid Credentials. Please try again.'
+  if request.form['username'] != 'admin' or request.form['password'] != 'admin': 
+   error = 'Invalid login'
   else:
-   return redirect(url_for('secret'))
+   session['logged_in'] = True
+   return redirect(url_for('hello'))
  return render_template('login.html', error=error)
+ 
+ 
 
-def validate(username, password):
- users = dbHandler.retrieveUsers()
- completion = False
- with con:
-  cur = con.cursor()
-  cur.execute("SELECT * FROM users")
-  rows = cur.fetchall()
-  for row in rows:
-   dbUser = row[0]
-   dbPass = row[1]
-   if dbUser==username:
-    completion=check_password(dbPass, password)
- return completion
-
-@app.route('/register', methods=['GET', 'POST'])
-def register():
- if request.method=='POST':
-  username = request.form['username']
-  password = request.form['password']
-  dbHandler.insertUser(username, password)
-  users = dbHandler.retrieveUsers()
-#redirect to url 
-  return render_template('login.html', users=username), 200
- else:
-  return render_template('register.html'), 200
 #Error Notice (wrong url)
 @app.errorhandler (404)
 def page_not_found(error):
  return " <h1><em>Sorry! <p>Couldn't find the page you requested.</p><em></h1>", 404
-
 
 #This allows the app to run website on the browser
 if __name__ == "__main__":

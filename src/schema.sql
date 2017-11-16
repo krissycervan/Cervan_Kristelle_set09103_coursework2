@@ -1,5 +1,8 @@
-DROP TABLE if EXISTS users;
- CREATE TABLE users (
- userid INTEGER PRIMARY KEY autoincrement,
- username text not null,
- password text not null);
+DROP TABLE if EXISTS veganfood;
+
+CREATE TABLE veganfood (
+ name text,
+ description, 
+ food_type text, 
+ shop_from text 
+ );
