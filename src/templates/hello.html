@@ -6,35 +6,39 @@
 
       <h2>You are now logged in</h2>
 	  
-	  <form action="" method="POST">
-			
-    			<input type="text" name="title" id="title" value="{{
+	  <form action="" method="POST">	
+    	<input type="text" name="title" id="title" value="{{
           request.form.title }}" placeholder="Name" required/>
     			<br>
-    			<input type="ingredients" name="ingredients" id="ingredients" value="{{
+    	<input type="ingredients" name="ingredients" id="ingredients" value="{{
           request.form.ingredients }}" placeholder="Ingredients" required/>
-		  <input type="text" name="instructions" id="instructions" value="{{
+		<input type="text" name="instructions" id="instructions" value="{{
           request.form.instructions }}" placeholder="Instructions" required/>
-
-		  <select name="food catergory" value="{{request.form.instructions }}">
-    <option value="breakfast">Breakfast</option>
-    <option value="mains">Mains</option>
-    <option value="desserts">Desserts</option>
-    <option value="sides">Sides</option>
-  </select>
+{% for category in category %}
+ 
+		  <select name="food category" value="{{request.form.category_id}}">
+			<option value="{{request.form.category_id}}">{{ category.category_name }}</option>
+			<!--<option value="{{request.form.category_id}}">Mains</option>
+			<option value="{{request.form.category_id}}">Desserts</option>
+			<option value="{{request.form.category_id}}">Sides</option>-->
+		  </select>
+  {% endfor %}
     			<br><br><br>
-    			<input type="submit" class="button" value="ADD"/>
+		<input type="submit" class="button" value="ADD"/>
 				<br>
-				<form>
+	<form>
 	  
 	  <h1> Vegan recipe</h1>
-{% for veganfood in veganfood %}
- 
- {{ veganfood.title }} <br>
- <strong>Ingredients:</strong>{{ veganfood.ingredients }}<br>
-  <strong>Instructions:</strong>{{ veganfood.instructions }}<br>
- 
-{% endfor %}
+			{% for veganfood in veganfood %}
+			 
+			  {{ veganfood.title }} <br>
+			 <strong>Ingredients:</strong>{{ veganfood.ingredients }}<br>
+			 <strong>Instructions:</strong>{{ veganfood.instructions }}<br>
+			  {% for category in category %}
+			 <strong>category:</strong>{{ category.category_name }}<br>
+			 
+			  {% endfor %}
+			{% endfor %}
 	  
 	  <br>
 	  <a href="/logout">Logout</>

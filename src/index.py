@@ -22,14 +22,18 @@ app.database = 'var/vegan.db'
 def index():
 #redirect to url 
  return render_template('index.html'), 200
+ 
+ 
+@app.route('/')
 @app.route('/about')
 def about():
 #redirect to url 
  return render_template('about.html'), 200
-@app.route('/frozen')
-def frozen():
+@app.route('/')
+@app.route('/Recipes')
+def recipes():
 #redirect to url 
- return render_template('frozen.html'), 200
+ return render_template('recipes.html'), 200
  
  
 #asks the user that login is required
@@ -63,21 +67,21 @@ def hello():
   ingredients = request.form['ingredients']
   instructions = request.form['instructions']
   g.db = connect_db()
-  cur = g.db.execute("insert into veganfood values(NOT NULL,?,?,?, NOT NULL)", (title,ingredients, instructions))
+  cur = g.db.execute("insert into veganfood values(NOT NULL,?,?,?, NOT NULL)", (title, ingredients, instructions))
   g.db.close()
+  
+ g.db = connect_db()
+ cur = g.db.execute("select * from categories, veganfood where veganfood.category_id='categories.category_id'")
+ category = [dict(category_id=row[0], category_name=row[1]) for row in cur.fetchall()]
+ g.db.close()
 
  g.db = connect_db()
- cur = g.db.execute("select * from veganfood")
+ cur = g.db.execute("select * from veganfood where title='Vegan Alfredo Pasta'")
  veganfood = [dict(title=row[1], ingredients=row[2], instructions=row[3]) for row in cur.fetchall()]
  g.db.close()
- return render_template('hello.html', veganfood=veganfood)
- 
-@app.route('/bakery')
-def bakery():
-#redirect to url 
- return render_template('bakery.html'), 200
+ return render_template('hello.html', veganfood=veganfood, category=category)
 
- 
+#login with sessions
 @app.route('/login', methods=['GET', 'POST'])
 def login():
  error = None
@@ -88,8 +92,31 @@ def login():
    session['logged_in'] = True
    return redirect(url_for('hello'))
  return render_template('login.html', error=error)
+
+#url redirects
+@app.route('/')
+@app.route('/breakfasts')
+def breakfast():
+#redirect to url 
+ return render_template('breakfasts.html'), 200
+
+@app.route('/')
+@app.route('/mains')
+def mains():
+#redirect to url 
+ return render_template('mains.html'), 200
  
+@app.route('/')
+@app.route('/desserts')
+def desserts():
+ #redirect to url 
+ return render_template('desserts.html'), 200
  
+@app.route('/')
+@app.route('/sides')
+def sides():
+#redirect to url 
+ return render_template('sides.html'), 200
 
 #Error Notice (wrong url)
 @app.errorhandler (404)
