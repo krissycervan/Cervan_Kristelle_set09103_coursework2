@@ -22,6 +22,14 @@ background-position:center;
  width:100%;
 }
 
+<!--recipes-->
+.column img
+{
+    width: 400px;
+    height: auto;
+   
+}
+
 div.gallery {
     border: 1px solid #ccc;
 }
@@ -86,7 +94,6 @@ footer {
 	width:100%;
 }
 
-
 .users, td
 {
  text-align:center;
@@ -114,57 +121,13 @@ footer {
   font:#f5f5f5;
 }
 
-<!--dropdown-->
 
-.dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
-    background-color: #3e8e41;
-}
 
  </style>
 </head>
-<body background="{{ url_for('static', filename='img/board.jpg') }}">
+<!--BACKGROUND IMAGE-->
+<body background="{{ url_for('static', filename='img/board.jpg') }}" style=" padding:0 30 30 30;"/>
+<!--NAVIGATION MENU-->
  <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
    <div class="navbar-header">
@@ -175,7 +138,7 @@ footer {
      <span class="icon-bar"></span>
      <span class="icon-bar"></span>
      </button>
-     <a class="navbar-brand" href="{{ url_for('index') }}">Vegan Food</a>
+     <a class="navbar-brand" href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='img/logosmall.png') }}" style="width:30px;"/></a>
     </div>
 
     <div id="navbar" class"=collapse navbar-collapse">
@@ -192,17 +155,15 @@ footer {
    </div>
    </div>
  </nav>
-<!--end of nav-->
+<!--END OF NAVIGATION MENU-->
      <div class="container">
 <br><br><br><br>
-
-
 </div>
 
 {% block content%}
 
  {% endblock %}
- <!--footer-->
+ <!--FOOTER-->
 <footer>Site Designed by Kristelle C.</footer>
 
 </body>
