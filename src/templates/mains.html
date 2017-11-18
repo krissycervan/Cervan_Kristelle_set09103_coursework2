@@ -1,1 +1,140 @@
-fee
+{% extends "base.html" %}
+{%block content%}
+<style>
+body{
+background-repeat:no-repeat;
+-webkit-background-size:cover;
+-moz-background-size:cover;
+-o-background-size:cover;
+background-size:cover;
+background-position:center;
+ 
+}
+footer
+{
+ bottom:0;
+ position:inherit;
+}
+
+.titleimg img
+{
+ width:100%;
+ padding-bottom:50px;
+}
+.titlebanner 
+{
+ padding-bottom:50px;
+ text-align:center;
+}
+div.gallery {
+    border: 5px solid #4bb178ba;
+}
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+	background-color:#4bb178ba;
+    color:white;
+	font-size:17px
+	
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.responsive {
+    padding: 0 6px;
+    float: left;
+    width: 24.99999%;
+	
+}
+
+@media only screen and (max-width: 700px){
+    .responsive {
+        width: 49.99999%;
+        margin: 6px 0;
+    }
+}
+
+@media only screen and (max-width: 500px){
+    .responsive {
+        width: 100%;
+    }
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+</style>
+<!--BACKGROUND IMAGE-->
+<body background="{{ url_for('static', filename='img/board.jpg') }}">
+<!-- VEGAN RECIPES IMAGE-->
+<div class="titlebanner">
+<img src="{{ url_for('static', filename='img/maintitle.png') }}">
+</div>
+
+<!-- GALLERY-->
+<div class="responsive">
+  <div class="gallery">
+  <a href="{{ url_for('alfredo') }}"/>
+      <img src="{{ url_for('static', filename='img/veganalfredopasta.jpg') }}" alt="alfredo" width="600" height="400"/>
+    </a>
+    <div class="desc">Vegan Alfredo Pasta</div>
+  </div>
+</div>
+
+
+<div class="responsive">
+  <div class="gallery">
+      <a href="{{ url_for('greencurry') }}"/>
+      <img src="{{ url_for('static', filename='img/greencurry.jpg') }}" alt="greencurry" width="600" height="400">
+    </a>
+    <div class="desc">Sweet Potato Green Curry</div>
+  </div>
+</div>
+
+
+
+<div class="responsive">
+  <div class="gallery">
+    <a href="{{ url_for('stirfry') }}"/>
+      <img src="{{ url_for('static', filename='img/stirfry.jpg') }}" alt="stirfry" width="600" height="400">
+    </a>
+    <div class="desc">Peanut Teriyaki Stir Fry</div>
+  </div>
+</div>
+
+<div class="responsive">
+  <div class="gallery">
+    <a href="{{ url_for('pumpkinpasta') }}"/>
+      <img src="{{ url_for('static', filename='img/pumpkinpasta.jpg') }}" alt="pumpkinpasta" width="600" height="400">
+    </a>
+    <div class="desc">Creamy Pumpkin Pasta</div>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+
+</div>
+
+<!--END OF GALLERY-->
+</body>
+
+
+ {% endblock %}
+
+
+

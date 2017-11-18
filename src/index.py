@@ -3,9 +3,10 @@ from flask import Flask, render_template, url_for, abort, request, redirect, g
 from flask import *
 from functools import wraps
 import sqlite3
+import sql as dbHandler
 app = Flask(__name__)
 app.secret_key = 'hello123'
-app.database = 'var/vegan.db'
+app.database = 'var/veganrecipe.db'
 
 # -*- coding: utf-8 -*-
 
@@ -59,27 +60,25 @@ def logout():
 def connect_db():
  return sqlite3.connect(app.database) 
 
-@app.route('/hello', methods=['GET','POST'])
+@app.route('/account', methods=['GET','POST'])
 @login_required
-def hello():
+def account():
  if request.method == 'POST':
   title = request.form['title'] 
   ingredients = request.form['ingredients']
   instructions = request.form['instructions']
-  g.db = connect_db()
-  cur = g.db.execute("insert into veganfood values(NOT NULL,?,?,?, NOT NULL)", (title, ingredients, instructions))
-  g.db.close()
+  dbHandler.insertRecipe(title, ingredients, instructions)
   
  g.db = connect_db()
- cur = g.db.execute("select * from categories, veganfood where veganfood.category_id='categories.category_id'")
- category = [dict(category_id=row[0], category_name=row[1]) for row in cur.fetchall()]
+ cur = g.db.execute("select * from veganfood")
+ veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
  g.db.close()
+  
 
- g.db = connect_db()
- cur = g.db.execute("select * from veganfood where title='Vegan Alfredo Pasta'")
- veganfood = [dict(title=row[1], ingredients=row[2], instructions=row[3]) for row in cur.fetchall()]
- g.db.close()
- return render_template('hello.html', veganfood=veganfood, category=category)
+ return render_template('hello.html', veganfood=veganfood)
+
+
+ 
 
 #login with sessions
 @app.route('/login', methods=['GET', 'POST'])
@@ -90,15 +89,71 @@ def login():
    error = 'Invalid login'
   else:
    session['logged_in'] = True
-   return redirect(url_for('hello'))
+   return redirect(url_for('account'))
  return render_template('login.html', error=error)
 
+ 
+ 
+ 
+#BREAKFASTS
 #url redirects
 @app.route('/')
 @app.route('/breakfasts')
 def breakfast():
 #redirect to url 
  return render_template('breakfasts.html'), 200
+ 
+@app.route('/')
+@app.route('/breakfasts')
+@app.route('/breakfasts/tofuscrambledegg')
+def tofuscrambledegg():
+#get recipe from database based on title and display to url
+ g.db = connect_db()
+ cur = g.db.execute("select * from veganfood where title='Tofu Scrambled Egg'")
+ veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
+ g.db.close()
+ return render_template('tofu.html', veganfood=veganfood), 200
+@app.route('/')
+@app.route('/breakfasts')
+@app.route('/breakfasts/applepieoats')
+def applepieoats():
+#get recipe from database based on title and display to url
+ g.db = connect_db()
+ cur = g.db.execute("select * from veganfood where title='Apple Pie Oats'")
+ veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
+ g.db.close()
+
+ return render_template('applepieoats.html', veganfood=veganfood), 200
+ 
+@app.route('/')
+@app.route('/breakfasts')
+@app.route('/breakfasts/bruschetta')
+def bruschetta():
+#get recipe from database based on title and display to url
+ g.db = connect_db()
+ cur = g.db.execute("select * from veganfood where title='Easy Bruschetta'")
+ veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
+ g.db.close()
+ return render_template('mugcake.html', veganfood=veganfood), 200
+ 
+ 
+@app.route('/')
+@app.route('/breakfasts')
+@app.route('/breakfasts/frenchtoast')
+def frenchtoast():
+#get recipe from database based on title and display to url
+ g.db = connect_db()
+ cur = g.db.execute("select * from veganfood where title='French Toast'")
+ veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
+ g.db.close()
+ return render_template('mugcake.html', veganfood=veganfood), 200
+ 
+ 
+ 
+ 
+ 
+ 
+ #MAINS 
 
 @app.route('/')
 @app.route('/mains')
@@ -107,10 +162,96 @@ def mains():
  return render_template('mains.html'), 200
  
 @app.route('/')
+@app.route('/mains')
+@app.route('/mains/alfredo')
+def alfredo():
+#get recipe from database based on title and display to url
+ g.db = connect_db()
+ cur = g.db.execute("select * from veganfood where title='Vegan Alfredo Pasta'")
+ veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
+ g.db.close()
+ return render_template('alfredopasta.html', veganfood=veganfood), 200
+
+ 
+@app.route('/')
+@app.route('/mains')
+@app.route('/mains/greencurry')
+def greencurry():
+#get recipe from database based on title and display to url
+ g.db = connect_db()
+ cur = g.db.execute("select * from veganfood where title='Sweet Potato Green Curry'")
+ veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
+ g.db.close()
+ return render_template('greencurry.html', veganfood=veganfood), 200
+
+ 
+@app.route('/')
+@app.route('/mains')
+@app.route('/mains/stirfry')
+def stirfry():
+#get recipe from database based on title and display to url
+ g.db = connect_db()
+ cur = g.db.execute("select * from veganfood where title='Peanut Teriyaki Stir Fry'")
+ veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
+ g.db.close()
+ return render_template('stirfry.html', veganfood=veganfood), 200
+ 
+ 
+@app.route('/')
+@app.route('/mains')
+@app.route('/mains/pumpkinpasta')
+def pumpkinpasta():
+#get recipe from database based on title and display to url
+ g.db = connect_db()
+ cur = g.db.execute("select * from veganfood where title='Creamy Pumpkin Pasta'")
+ veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
+ g.db.close()
+ return render_template('pumpkinpasta.html', veganfood=veganfood), 200
+
+
+ 
+#SIDES
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+#DESSERTS
+ 
+ 
+@app.route('/')
 @app.route('/desserts')
 def desserts():
  #redirect to url 
  return render_template('desserts.html'), 200
+ 
+@app.route('/')
+@app.route('/desserts')
+@app.route('/desserts/mugcake')
+def peanutbuttermugcake():
+#get recipe from database based on title and display to url
+ g.db = connect_db()
+ cur = g.db.execute("select * from veganfood where title='Peanut Butter Mug Cake'")
+ veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
+ g.db.close()
+ return render_template('mugcake.html', veganfood=veganfood), 200
+ 
+@app.route('/delete', methods=['POST'])
+def delete_recipe():
+   g.db = connect_db()
+   g.db.execute('delete from veganfood where rowid =?')
+   veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
+   g.db.close()
+   return render_template('hello.html', veganfood=veganfood)
  
 @app.route('/')
 @app.route('/sides')

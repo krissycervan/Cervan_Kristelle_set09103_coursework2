@@ -1,46 +1,68 @@
 {% extends "base.html" %}
 {%block content%}
+<style>
+form{
+ text-align:center;
+}
+input{
+ height: 30px;
+ width: 300px;
+ 
+}
+textarea{
+height: 30px;
+ width: 300px;
+ 
+ }
+footer
+{
+ position:inherit;
+}
 
-  
+.main{
+ background:darkseagreen;
+ padding:10px 50px;
+}
+</style>
+	<div class="main">
+	  <form action="" method="POST" >
+	  	  <h2>Add Recipe Here:</h2>
 
-
-      <h2>You are now logged in</h2>
-	  
-	  <form action="" method="POST">	
+	  <h3>Recipe Name:</h3>
     	<input type="text" name="title" id="title" value="{{
           request.form.title }}" placeholder="Name" required/>
     			<br>
-    	<input type="ingredients" name="ingredients" id="ingredients" value="{{
-          request.form.ingredients }}" placeholder="Ingredients" required/>
-		<input type="text" name="instructions" id="instructions" value="{{
-          request.form.instructions }}" placeholder="Instructions" required/>
-{% for category in category %}
- 
-		  <select name="food category" value="{{request.form.category_id}}">
-			<option value="{{request.form.category_id}}">{{ category.category_name }}</option>
-			<!--<option value="{{request.form.category_id}}">Mains</option>
-			<option value="{{request.form.category_id}}">Desserts</option>
-			<option value="{{request.form.category_id}}">Sides</option>-->
-		  </select>
-  {% endfor %}
+    	<h3>Ingredients:</h3>
+		<textarea type="textarea" name="ingredients" id="ingredients" value="{{
+          request.form.ingredients }}" placeholder="Ingredients" required style="height:100px"></textarea><br>
+		<h3>Instructions:</h3>
+		<textarea type="text" name="instructions" id="instructions" value="{{
+          request.form.instructions }}" placeholder="Instructions" required style="height:100px"></textarea>
     			<br><br><br>
 		<input type="submit" class="button" value="ADD"/>
+
 				<br>
-	<form>
-	  
-	  <h1> Vegan recipe</h1>
+	</form>
+<div class="main">
+	  <h1> Vegan Recipes</h1>
 			{% for veganfood in veganfood %}
 			 
-			  {{ veganfood.title }} <br>
-			 <strong>Ingredients:</strong>{{ veganfood.ingredients }}<br>
+			  <h2>{{ veganfood.title }} </h2><br>
+			 <strong>Ingredients:</strong>{{ veganfood.ingredients }}<br><br>
 			 <strong>Instructions:</strong>{{ veganfood.instructions }}<br>
-			  {% for category in category %}
-			 <strong>category:</strong>{{ category.category_name }}<br>
-			 
-			  {% endfor %}
-			{% endfor %}
+			 <br>
+			 <form action="{{ url_for('delete_recipe') }}" method=post class=delete_recipe>
+<input type=hidden value="{{ veganfood.id }}"name=recipe_to_delete"></input>
+<input type=submit value="Delete"/>
+</form>
+			{% endfor %}<br><br>
+			
+	  
+	  
 	  
 	  <br>
-	  <a href="/logout">Logout</>
-      
+	  </div>
+	  <button style="text-align:center;"><a href="/logout">Logout</button>
+    
 {% endblock %}
+
