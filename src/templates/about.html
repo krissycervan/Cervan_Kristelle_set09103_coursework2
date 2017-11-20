@@ -1,35 +1,36 @@
 {% extends "base.html" %}
 {%block content%}
+
+<!--CSS STYLING-->
 <style>
-.banner img{
-height:280px;
-width:100%;
-}
-.abouttext{
-background-color:#e5ffdb;
-margin:50px;
-border-style:double;
+
+footer {
+    clear: both;
+	text-align: center;
+	font-size:14px;
+    position:fixed;
+    right: 0;
+    left: 0;
+    padding: 1rem;
+	background-color:#193509;
+	margin-top:20px;
+	bottom:0;
+	color:#9d9d9d;
+	width:100%;
 
 }
-.abouttext p{
-
-margin:30px;
-padding:10px
-
-
-}
+<!--END OF CSS-->
 </style>
+<!--MAIN CONTENT-->
 <div class="banner">
-
-<img src="{{ url_for('static', filename='img/about_banner.jpg') }}"/>
-
-<div class="abouttext">
- <p>Lazy Vegan Recipes is a website where you can find easy vegan recipes. Most of recipes are already available from your cupboard!</p>
-
+ <img src="{{ url_for('static', filename='img/about_banner.jpg') }}"/>
+ <div class="abouttext">
+  <p>Vegan Recipes is where you can find easy to do vegan recipes. Easy to follow recipes with minimal ingredients for those who like delicious food but don’t want to slave for a million hours in the kitchen! Affordable and easy-to-find ingredients (no vegan cheeses, butters or fake meats!). Tons of lazy recipes that take less than 15 minutes to make. Mostly oil-free recipes</p>
+ </div>
 </div>
 
-</div>
+<footer>Site Designed by Kristelle C.</footer>
 
-
+<!--END OF MAIN CONTENT-->
  {% endblock %}
 

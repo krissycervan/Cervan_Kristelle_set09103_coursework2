@@ -1,37 +1,59 @@
 {% extends "base.html" %}
 {%block content%}
+<!--CSS STYLING-->
+<style>
 
+footer {
+    clear: both;
+	text-align: center;
+	font-size:14px;
+    position:fixed;
+    right: 0;
+    left: 0;
+    padding: 1rem;
+	background-color:#193509;
+	margin-top:20px;
+	bottom:0;
+	color:#9d9d9d;
+	width:100%;
+
+}
+<!--END OF CSS-->
+</style>
    
-
+<!--LOGIN FORM-->
       
-    	<div class="box">
+    	<div class="boxform">
   			<h1>Log In</h1>
 			<br>
 			 {%if error%}
-    <div class="error"><strong>Error:</strong> {{ error }}
-	{%endif%}
+		<div class="error"><strong>Error:</strong> {{ error }}
+		{%endif%}
   			<form action="" method="POST">
 			
     			<input type="text" name="username" id="username" value="{{
-          request.form.username }}" placeholder="Username" required/>
-    			<br>
+					request.form.username }}" placeholder="Username" required/>
+    			<br><br>
     			<input type="password" name="password" id="password" value="{{
-          request.form.password }}" placeholder="Password" required/>
+					request.form.password }}" placeholder="Password" required/>
     			<br><br><br>
     			<input type="submit" class="button" value="Log In"/>
 				<br>
-				{% for message in get_flashed_messages() %}
-		 <div class=flash>
-		  {{ message }}
-		  </div>
-		 {% endfor %}
+	    {% for message in get_flashed_messages() %}
+		<BR>
+		<!--DISPLAY MESSAGE WHEN LOGGED OUT-->
+			 <div class=flash>
+			  {{ message }}
+			  </div>
+			 {% endfor %}
 		 
 		 
   			</form>
 		</div>
+		</div>
 		
+<!--END OF LOGIN FORM-->
 
-
-     
+     <footer>Site Designed by Kristelle C.</footer>
     
 {% endblock %}

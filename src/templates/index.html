@@ -1,81 +1,29 @@
 {% extends "base.html" %}
 {%block content%}
+<!--CSS-->
+
 <style>
-body{
-background-repeat:no-repeat;
--webkit-background-size:cover;
--moz-background-size:cover;
--o-background-size:cover;
-background-size:cover;
-background-position:center;
- 
-}
-footer
-{
- bottom:0;
- position:inherit;
-}
 
-.titleimg img
-{
- width:100%;
- padding-bottom:50px;
-}
-div.gallery {
-    border: 5px solid #4bb178ba;
-}
-
-div.gallery:hover {
-    border: 1px solid #777;
-}
-
-div.gallery img {
-    width: 100%;
-    height: auto;
-}
-
-div.desc {
-    padding: 15px;
-    text-align: center;
-	background-color:#4bb178ba;
-    color:white;
-	font-size:40px
-	
-}
-
-* {
-    box-sizing: border-box;
-}
-
-.responsive {
-    padding: 0 6px;
-    float: left;
-    width: 24.99999%;
-	
-}
-
-@media only screen and (max-width: 700px){
-    .responsive {
-        width: 49.99999%;
-        margin: 6px 0;
-    }
-}
-
-@media only screen and (max-width: 500px){
-    .responsive {
-        width: 100%;
-    }
-}
-
-.clearfix:after {
-    content: "";
-    display: table;
+footer {
     clear: both;
+	text-align: center;
+	font-size:14px;
+    position:fixed;
+    right: 0;
+    left: 0;
+    padding: 1rem;
+	background-color:#193509;
+	margin-top:20px;
+	bottom:0;
+	color:#9d9d9d;
+	width:100%;
+
 }
+
 </style>
-<!--BACKGROUND IMAGE-->
-<body background="{{ url_for('static', filename='img/board.jpg') }}">
-<!-- VEGAN RECIPES IMAGE-->
+<!--END OF CSS-->
+<!--MAIN CONTENT-->
+<!-- TITLE OF PAGE-->
 <div class="titleimg">
 <img src="{{ url_for('static', filename='img/title.png') }}"/>
 </div>
@@ -123,11 +71,10 @@ div.desc {
 <div class="clearfix"></div>
 
 </div>
-
 <!--END OF GALLERY-->
-</body>
+<!--END OF MAIN CONTENT-->
 
-
+<footer>Site Designed by Kristelle C.</footer>
  {% endblock %}
 
 

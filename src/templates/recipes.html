@@ -1,34 +1,12 @@
 {% extends "base.html" %}
 {%block content%}
-<style>
-.banner img{
-height:280px;
-width:100%;
-}
-.abouttext{
-background-color:#e5ffdb;
-margin:50px;
-border-style:double;
-
-}
-.abouttext p{
-
-margin:30px;
-padding:10px
-
-
-}
-</style>
-<div class="banner">
-
-<img src="{{ url_for('static', filename='img/about_banner.jpg') }}"/>
-
-<div class="abouttext">
- <p>Lazy Vegan Recipes is a website where you can find easy vegan recipes. Most of recipes are already available from your cupboard!</p>
-
-</div>
-
-</div>
-
-
+<!--MAIN CONTENT-->
+<div class="titlebanner">
+<img src="{{ url_for('static', filename='img/allrecipes.jpg') }}"/>
+  <div class="abouttext">
+    <p>Lazy Vegan Recipes is a website where you can find easy vegan recipes. Most of recipes are already available from your cupboard!</p>
+  </div>
+<div>
+<!--END OF MAIN CONTENT-->
+<footer>Site Designed by Kristelle C.</footer>
  {% endblock %}

@@ -1,54 +1,28 @@
 {% extends "base.html" %}
 {%block content%}
+<!--CSS STYLING-->
 <style>
-body{
-background-repeat:no-repeat;
--webkit-background-size:cover;
--moz-background-size:cover;
--o-background-size:cover;
-background-size:cover;
-background-position:center;
- 
-}
-footer
-{
- bottom:0;
- 
-}
 
-/* Create two equal columns that floats next to each other */
-.column {
-    
-    width: 100%;
-    padding: 10px 100px;
-	text-align:center;
-}
-
-/* Clear floats after the columns */
-.row:after {
-    content: "";
-    display: table;
+footer {
     clear: both;
+	text-align: center;
+	font-size:14px;
+    position:fixed;
+    right: 0;
+    left: 0;
+    padding: 1rem;
+	background-color:#193509;
+	margin-top:20px;
+	bottom:0;
+	color:#9d9d9d;
+	width:100%;
+
 }
-
-.column img
-{
-    width: 400px;
-    height: auto;
-   
-}
-
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media (max-width: 600px) {
-    .column {
-        width: 100%;
-    }
-}
-
-
+<!--END OF CSS-->
 </style>
-<!--BACKGROUND IMAGE-->
-<body background="{{ url_for('static', filename='img/board.jpg') }}">
+
+<!--MAIN CONTENT-->
+
 <div class="row">
   <div class="column" style="background-color:#aebbb1;">  
 	<img src="{{ url_for('static', filename='img/stirfry.jpg') }}"/>
@@ -61,7 +35,7 @@ footer
   </div>
 </div>
 
-</body>
-
+<!--END OF MAIN CONTENT-->
+<footer>Site Designed by Kristelle C.</footer>
 
  {% endblock %}
