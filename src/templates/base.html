@@ -27,33 +27,14 @@ height: 30px;
 
 
 .main{
- background:darkseagreen;
- padding:10px 50px;
+ background: chocolate;
+ padding: 10px 50px;
+ color: black;
 }
 
-.banner img{
-height:280px;
-width:100%;
-}
-.abouttext{
-background-color:#aebbb1;
-margin:50px;
-border-style:double;
 
-}
-.abouttext p{
+<!--individual recipe page-->
 
-margin:30px;
-padding:10px
-
-}
-/* Create two equal columns that floats next to each other */
-.column {
-    
-    width: 100%;
-    padding: 100px 100px 50px;
-    text-align: center;
-}
 
 /* Clear floats after the columns */
 .row:after {
@@ -70,11 +51,20 @@ padding:10px
  
 }
 
+/* Create two equal columns that floats next to each other */
+.column {
+    
+    width: 100%;
+    padding: 30px 100px 50px;
+    text-align: center;
+	
+}
+
 .column img
 {
-    width: 400px;
+    width: 50%;
     height: auto;
-   
+    
 }
 
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
@@ -86,12 +76,17 @@ padding:10px
 
 
 
+.titleimg
+{
+   text-align: center;
+    padding: 8%;
+	background:chocolate;
+}
 .titleimg img
 {
-    margin: 60 0 10 0;
-    width: 50%;
-	
+ width:500px;
 }
+
 
 .titlebanner 
 {
@@ -126,7 +121,7 @@ div.desc {
 }
 
 .responsive {
-    padding: 0 6px;
+    padding: 20px;
     float: left;
     width: 24.99999%;
 	
@@ -188,7 +183,7 @@ div.desc {
 </head>
 <!--MAIN CONTENT-->
 <!--BACKGROUND IMAGE-->
-<body background="{{ url_for('static', filename='img/board.jpg') }}" style="width:100%;" />
+<body background="{{ url_for('static', filename='img/board.jpg') }}"/>
 <!--NAVIGATION MENU-->
  <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
@@ -207,6 +202,7 @@ div.desc {
      <ul class="nav navbar-nav">
       <li><a href="{{ url_for('index') }}">Home</a></li>
 	   <li><a href="{{ url_for('about') }}">About Us</a></li>
+	    <li><a href="{{ url_for('allrecipes') }}">All Recipes</a></li>
 	    <li><a href="{{ url_for('breakfast') }}">Breakfasts</a></li>
 		<li><a href="{{ url_for('mains') }}">Mains</a></li>
 		<li><a href="{{ url_for('sides') }}">Sides</a></li>

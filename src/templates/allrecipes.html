@@ -1,0 +1,314 @@
+{% extends "base.html" %}
+{%block content%}
+
+
+
+<!--CSS STYLING-->
+<style>
+
+footer {
+    clear: both;
+	text-align: center;
+	font-size:14px;
+    position:fixed;
+    right: 0;
+    left: 0;
+    padding: 1rem;
+	background-color:#193509;
+	margin-top:20px;
+	bottom:0;
+	color:#9d9d9d;
+	width:100%;
+	position:static;
+	
+	}
+
+
+.list li {
+  background:chocolate;
+  border-bottom: 1px solid #ccc;
+  display: table;
+  border-collapse: collapse;
+  width: 100%;
+}
+.inner {
+  display: table-row;
+  overflow: hidden;
+}
+.li-img {
+  display: table-cell;
+  vertical-align: middle;
+  width: 30%;
+  padding-right: 1em;
+}
+.li-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.li-text {
+  display: table-cell;
+  vertical-align: middle;
+  width: 70%;
+}
+.li-head {
+  margin: 40px;
+  color:black;
+}
+.li-sub {
+  margin: 0;
+}
+
+@media all and (min-width: 45em) {
+  .list li {
+    float: left;
+    width: 50%;
+	  
+  }
+}
+
+@media all and (min-width: 75em) {
+  .list li {
+    width: 33.33333%;
+  }
+}
+	
+
+<!--END OF CSS-->
+</style>
+
+<!--MAIN CONTENT-->
+
+<div class="titlebanner">
+<img src="{{ url_for('static', filename='img/allrecipes.png') }}">
+</div>
+
+
+<!-- GALLERY all recipes-->
+
+  <div id="pattern" class="pattern">
+  	<ul class="list img-list">
+			<li>
+				<a href="#" class="inner">
+					<div class="li-img">
+						 <a href="{{ url_for('pumpkinpasta') }}"/>
+      <img src="{{ url_for('static', filename='img/pumpkinpasta.jpg') }}" alt="pumpkinpasta" width="600" height="400">
+    
+					</div>
+					<div class="li-text">
+						<h4 class="li-head">Creamy Pumpkin Pasta</h4>
+						
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="inner">
+					<div class="li-img">
+						<a href="{{ url_for('stirfry') }}"/>
+      <img src="{{ url_for('static', filename='img/stirfry.jpg') }}" alt="stirfry" width="600" height="400">
+    
+					</div>
+					<div class="li-text">
+						<h4 class="li-head">Peanut Teriyaki Stir Fry </h4>
+						
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="inner">
+					<div class="li-img">
+						<a href="{{ url_for('greencurry') }}"/>
+      <img src="{{ url_for('static', filename='img/greencurry.jpg') }}" alt="greencurry" width="600" height="400">
+    
+					</div>
+					<div class="li-text">
+						<h4 class="li-head">Sweet Potato Green Curry</h4>
+						
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="inner">
+					<div class="li-img">
+					 <a href="{{ url_for('alfredo') }}"/>
+					 <img src="{{ url_for('static', filename='img/veganalfredopasta.jpg') }}" alt="alfredo" width="600" height="400"/>
+					</div>
+					<div class="li-text">
+						<h4 class="li-head">Vegan Alfredo Pasta</h4>
+						
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="inner">
+					<div class="li-img">
+					 <a href="{{ url_for('frenchtoast') }}"/>
+						 <img src="{{ url_for('static', filename='img/frenchtoast.png') }}" alt="FrenchToast" width="600" height="400">
+					</div>
+					<div class="li-text">
+						<h4 class="li-head">French Toast</h4>
+					
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="inner">
+					<div class="li-img">
+				 <a href="{{ url_for('bruschetta') }}"/>
+      <img src="{{ url_for('static', filename='img/bruschetta.jpg') }}" alt="Bruschetta" width="600" height="400">
+    
+					</div>
+					<div class="li-text">
+						<h4 class="li-head">Easy Bruschetta</h4>
+				
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="inner">
+					<div class="li-img">
+						<a href="{{ url_for('tofuscrambledegg') }}"/>
+      <img src="{{ url_for('static', filename='img/tofuscrambled.jpg') }}" alt="tofu" width="600" height="400">
+
+					</div>
+					<div class="li-text">
+						<h4 class="li-head">Tofu Scrambled Egg</h4>
+						
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="inner">
+					<div class="li-img">
+					<a href="{{ url_for('applepieoats') }}"/>
+						 <img src="{{ url_for('static', filename='img/applepieoats.png') }}" alt="applepie" width="600" height="400"/>
+					</div>
+					<div class="li-text">
+						<h4 class="li-head">Apple Pie Oat</h4>
+						
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="inner">
+					<div class="li-img">
+						<a href="{{ url_for('mugroll') }}"/>
+      <img src="{{ url_for('static', filename='img/mugroll.jpg') }}" alt="mugroll" width="600" height="400">
+    
+					</div>
+					<div class="li-text">
+						<h4 class="li-head">Cinnamon Mug Roll</h4>
+					
+					</div>
+				</a>
+			</li>
+			
+			<li>
+				<a href="#" class="inner">
+					<div class="li-img">
+						<a href="{{ url_for('tahini') }}"/>
+      <img src="{{ url_for('static', filename='img/tahini.jpg') }}" alt="tahini" width="600" height="400"/>
+  
+					</div>
+					<div class="li-text">
+						<h4 class="li-head">Asian Tahini Dressing</h4>
+						
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="inner">
+					<div class="li-img">
+						<a href="{{ url_for('muffins') }}"/>
+      <img src="{{ url_for('static', filename='img/muffins.jpg') }}" alt="muffins" width="600" height="400">
+    
+					</div>
+					<div class="li-text">
+						<h4 class="li-head">Healthy Chocolate Chip Muffins</h4>
+						
+					</div>
+				</a>
+			</li>
+			
+				<li>
+				<a href="#" class="inner">
+					<div class="li-img">
+						<a href="{{ url_for('mousse') }}"/>
+      <img src="{{ url_for('static', filename='img/mousse.jpg') }}" alt="main" width="600" height="400">
+
+					</div>
+					<div class="li-text">
+						<h4 class="li-head">Whipped Chocolate Mousse</h4>
+						
+					</div>
+				</a>
+			</li>
+			
+				<li>
+				<a href="#" class="inner">
+					<div class="li-img">
+						 <a href="{{ url_for('peanutbuttermugcake') }}"/>
+      <img src="{{ url_for('static', filename='img/mugcake.jpg') }}" alt="mugcake" width="600" height="400"/>
+
+					</div>
+					<div class="li-text">
+						<h4 class="li-head">Peanut Butter Mug Cake</h4>
+						
+					</div>
+				</a>
+			</li>
+			
+				<li>
+				<a href="#" class="inner">
+					<div class="li-img">
+						 <a href="{{ url_for('eggplant') }}"/>
+      <img src="{{ url_for('static', filename='img/eggplant.jpg') }}" alt="eggplant" width="600" height="400">
+   
+					</div>
+					<div class="li-text">
+						<h4 class="li-head">Eggplant Rounds</h4>
+					
+					</div>
+				</a>
+			</li>
+			
+			
+				<li>
+				<a href="#" class="inner">
+					<div class="li-img">
+						  <a href="{{ url_for('hummus') }}"/>
+      <img src="{{ url_for('static', filename='img/hummus.jpg') }}" alt="hummus" width="600" height="400">
+    
+					</div>
+					<div class="li-text">
+						<h4 class="li-head">Simply Hummus</h4>
+						
+					</div>
+				</a>
+			</li>
+			
+			
+			<li>
+				<a href="#" class="inner">
+					<div class="li-img">
+						   <a href="{{ url_for('egglessmayo') }}"/>
+      <img src="{{ url_for('static', filename='img/egglessmayo.jpg') }}" alt="egglessmayo" width="600" height="400">
+  
+					</div>
+					<div class="li-text">
+						<h4 class="li-head">Eggless Mayo/Spicy Mayo</h4>
+						
+					</div>
+				</a>
+			</li>
+			
+		</ul>
+	</div>
+
+
+
+<!--END OF GALLERY-->
+<!--END OF MAIN CONTENT-->
+<footer>Site Designed by Kristelle C.</footer>
+
+ {% endblock %}

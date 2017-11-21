@@ -9,13 +9,9 @@ app.secret_key = 'hello123'
 app.database = 'var/veganrecipe.db'
 
 # -*- coding: utf-8 -*-
-
-#"print" will allow to show it to the html page.
 #"routes" are for mapping URLs to application actions, and conversely to generate URLs
 #"def" define a function
 # "with" Use file to refer to the file object
-#"in" is used to look inside an object.
-
 
 
 @app.route('/')
@@ -31,10 +27,10 @@ def about():
 #redirect to url 
  return render_template('about.html'), 200
 @app.route('/')
-@app.route('/Recipes')
-def recipes():
+@app.route('/allrecipes')
+def allrecipes():
 #redirect to url 
- return render_template('recipes.html'), 200
+ return render_template('allrecipes.html'), 200
  
  
 #asks the user that login is required
@@ -56,11 +52,12 @@ def logout():
  flash('You are now logged out!')
  return redirect(url_for('login'))
  
- 
+#connect to database
 def connect_db():
  return sqlite3.connect(app.database) 
-
+#retrieve account from database and go to account.html
 @app.route('/account', methods=['GET','POST'])
+#login is required 
 @login_required
 def account():
  if request.method == 'POST':
@@ -73,14 +70,13 @@ def account():
  cur = g.db.execute("select * from veganfood")
  veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
  g.db.close()
-  
-
- return render_template('hello.html', veganfood=veganfood)
+ 
+ return render_template('account.html', veganfood=veganfood)
 
 
  
 
-#login with sessions
+#login with sessions. if loggedin is true go to accountpage, if not go to login.html
 @app.route('/login', methods=['GET', 'POST'])
 def login():
  error = None
@@ -93,6 +89,14 @@ def login():
  return render_template('login.html', error=error)
 
  
+ #DELETE RECIPE
+@app.route('/delete', methods=['POST'])
+def delete_recipe():
+   g.db = connect_db()
+   g.db.execute('delete rowid, from veganfood where rowid =?', (rowid))
+   veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
+   g.db.close()
+   return render_template('account.html', veganfood=veganfood) 
  
  
 #BREAKFASTS
@@ -122,7 +126,7 @@ def applepieoats():
  cur = g.db.execute("select * from veganfood where title='Apple Pie Oats'")
  veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
  g.db.close()
-
+#redirect to url
  return render_template('applepieoats.html', veganfood=veganfood), 200
  
 @app.route('/')
@@ -134,7 +138,7 @@ def bruschetta():
  cur = g.db.execute("select * from veganfood where title='Easy Bruschetta'")
  veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
  g.db.close()
- return render_template('mugcake.html', veganfood=veganfood), 200
+ return render_template('bruschetta.html', veganfood=veganfood), 200
  
  
 @app.route('/')
@@ -146,7 +150,7 @@ def frenchtoast():
  cur = g.db.execute("select * from veganfood where title='French Toast'")
  veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
  g.db.close()
- return render_template('mugcake.html', veganfood=veganfood), 200
+ return render_template('frenchtoast.html', veganfood=veganfood), 200
  
  
  
@@ -208,22 +212,6 @@ def pumpkinpasta():
  g.db.close()
  return render_template('pumpkinpasta.html', veganfood=veganfood), 200
 
-
- 
-#SIDES
-
-
-
-
-
-
-
-
-
-
-
-
-
  
 #DESSERTS
  
@@ -278,22 +266,9 @@ def mugroll():
  cur = g.db.execute("select * from veganfood where title='Cinnamon Mug Roll'")
  veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
  g.db.close()
- return render_template('mousse.html', veganfood=veganfood), 200
+ return render_template('mugroll.html', veganfood=veganfood), 200
  
- 
- 
- #DELETE RECIPE
-@app.route('/delete', methods=['POST'])
-def delete_recipe():
-   g.db = connect_db()
-   g.db.execute('delete from veganfood where rowid =?')
-   veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
-   g.db.close()
-   return render_template('hello.html', veganfood=veganfood)
 
-   
-   
-   
    
 #SIDES
 @app.route('/')
@@ -311,7 +286,7 @@ def tahini():
  cur = g.db.execute("select * from veganfood where title='Asian Tahini Dressing'")
  veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
  g.db.close()
- return render_template('mousse.html', veganfood=veganfood), 200
+ return render_template('tahini.html', veganfood=veganfood), 200
 
 @app.route('/')
 @app.route('/sides')
@@ -322,7 +297,7 @@ def hummus():
  cur = g.db.execute("select * from veganfood where title='Simply Hummus'")
  veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
  g.db.close()
- return render_template('mousse.html', veganfood=veganfood), 200
+ return render_template('hummus.html', veganfood=veganfood), 200
 
 @app.route('/')
 @app.route('/sides')
@@ -333,8 +308,9 @@ def egglessmayo():
  cur = g.db.execute("select * from veganfood where title='Eggless Mayo/Spicy Mayo'")
  veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
  g.db.close()
- return render_template('mousse.html', veganfood=veganfood), 200
+ return render_template('egglessmayo.html', veganfood=veganfood), 200
  
+
 @app.route('/')
 @app.route('/sides')
 @app.route('/sides/eggplant')
@@ -344,9 +320,8 @@ def eggplant():
  cur = g.db.execute("select * from veganfood where title='Eggplant Rounds'")
  veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
  g.db.close()
- return render_template('mousse.html', veganfood=veganfood), 200 
- 
- 
+ return render_template('eggplant.html', veganfood=veganfood), 200 
+
  
  
 #Error Notice (wrong url)

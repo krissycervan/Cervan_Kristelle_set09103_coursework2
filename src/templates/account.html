@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{%block content%}
+
+
+<!--CSS STYLING-->
+<style>
+
+footer {
+    clear: both;
+	text-align: center;
+	font-size:14px;
+    position:fixed;
+    right: 0;
+    left: 0;
+    padding: 1rem;
+	background-color:#193509;
+	margin-top:20px;
+	bottom:0;
+	color:#9d9d9d;
+	width:100%;
+
+}
+<!--END OF CSS-->
+</style>
+<!--END OF CSS-->
+<!--MAIN CONTENT-->
+<!--FORM-->
+	<div class="boxaccount">
+	  <form action="" method="POST" >
+	  	  <h2>Add Recipe Here:</h2>
+
+	  <h3>Recipe Name:</h3>
+    	  <input type="text" name="title" id="title" value="{{
+           request.form.title }}" placeholder="Name" required/>
+    			<br>
+    	  <h3>Ingredients:</h3>
+		<textarea type="textarea" name="ingredients" id="ingredients" value="{{
+          request.form.ingredients }}" placeholder="Ingredients" required style="height:100px"></textarea><br>
+		<h3>Instructions:</h3>
+		<textarea type="text" name="instructions" id="instructions" value="{{
+          request.form.instructions }}" placeholder="Instructions" required style="height:100px"></textarea>
+    			<br><br><br>
+		<input type="submit" class="button" value="ADD"/>
+
+				<br>
+	</form>
+<!--END OF FORM-->
+<div class="main">
+	  <h1> Vegan Recipes</h1>
+			{% for veganfood in veganfood %}
+			 
+			  <h2>{{ veganfood.title }} </h2><br>
+			 <strong>Ingredients:</strong>{{ veganfood.ingredients }}<br><br>
+			 <strong>Instructions:</strong>{{ veganfood.instructions }}<br>
+			 <br>
+	<form action="{{ url_for('delete_recipe') }}" method=post class=delete_recipe>
+             <input type=hidden value="{{ veganfood.id }}"name=recipe_to_delete"></input>
+             <input type=submit value="Delete"/>
+         </form>
+			{% endfor %}<br><br><br>
+<!--LOGOUT-->
+	  </div>
+	  <button style="text-align:center;"><a href="/logout">Logout</button>
+<!--END OF MAIN CONTENT-->
+    <footer>Site Designed by Kristelle C.</footer>
+{% endblock %}
+

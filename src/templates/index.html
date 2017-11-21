@@ -5,25 +5,25 @@
 <style>
 
 footer {
-    clear: both;
-	text-align: center;
-	font-size:14px;
-    position:fixed;
-    right: 0;
-    left: 0;
-    padding: 1rem;
-	background-color:#193509;
-	margin-top:20px;
-	bottom:0;
-	color:#9d9d9d;
-	width:100%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  text-align: center;
+  clear: both;
+  text-align: center;
+  font-size:14px;
+  background-color:#193509;
+  color:#9d9d9d;
+	
 
 }
-
 </style>
 <!--END OF CSS-->
 <!--MAIN CONTENT-->
 <!-- TITLE OF PAGE-->
+
 <div class="titleimg">
 <img src="{{ url_for('static', filename='img/title.png') }}"/>
 </div>
@@ -70,11 +70,10 @@ footer {
 
 <div class="clearfix"></div>
 
-</div>
 <!--END OF GALLERY-->
 <!--END OF MAIN CONTENT-->
-
 <footer>Site Designed by Kristelle C.</footer>
+
  {% endblock %}
 
 
