@@ -89,7 +89,7 @@ def login():
  #DELETE RECIPE
 @app.route('/delete', methods=['POST'])
 def delete_recipe():
- if request.form['recipe_to_delete']
+ if request.form['recipe_to_delete']:
   g.db = connect_db()
   g.db.execute('delete from veganfood where title =?', [request.form['recipe_to_delete']])
  #veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
