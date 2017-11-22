@@ -20,6 +20,10 @@ footer {
 	width:100%;
 
 }
+logout{
+ background:white;
+
+}
 <!--END OF CSS-->
 </style>
 <!--END OF CSS-->
@@ -33,14 +37,14 @@ footer {
     	  <input type="text" name="title" id="title" value="{{
            request.form.title }}" placeholder="Name" required/>
     			<br>
-    	  <h3>Ingredients:</h3>
-		<textarea type="textarea" name="ingredients" id="ingredients" value="{{
+     <h3>Ingredients:</h3>
+		 <textarea type="textarea" name="ingredients" id="ingredients" value="{{
           request.form.ingredients }}" placeholder="Ingredients" required style="height:100px"></textarea><br>
-		<h3>Instructions:</h3>
-		<textarea type="text" name="instructions" id="instructions" value="{{
+	 <h3>Instructions:</h3>
+		 <textarea type="text" name="instructions" id="instructions" value="{{
           request.form.instructions }}" placeholder="Instructions" required style="height:100px"></textarea>
     			<br><br><br>
-		<input type="submit" class="button" value="ADD"/>
+		 <input type="submit" class="button" value="ADD"/>
 
 				<br>
 	</form>
@@ -53,14 +57,15 @@ footer {
 			 <strong>Ingredients:</strong>{{ veganfood.ingredients }}<br><br>
 			 <strong>Instructions:</strong>{{ veganfood.instructions }}<br>
 			 <br>
-	<form action="{{ url_for('delete_recipe') }}" method=post class=delete_recipe>
-             <input type=hidden value="{{ veganfood.id }}"name=recipe_to_delete"></input>
+	     <form action="{{ url_for('delete_recipe') }}" method=post class=delete_recipe>
+             <input type=hidden value="{{ veganfood.title }}"name=recipe_to_delete"></input>
              <input type=submit value="Delete"/>
          </form>
 			{% endfor %}<br><br><br>
+			
 <!--LOGOUT-->
-	  </div>
-	  <button style="text-align:center;"><a href="/logout">Logout</button>
+     <button><a href="/logout">LOGOUT</a></button>
+</div>
 <!--END OF MAIN CONTENT-->
     <footer>Site Designed by Kristelle C.</footer>
 {% endblock %}

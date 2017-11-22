@@ -33,7 +33,7 @@ def allrecipes():
  return render_template('allrecipes.html'), 200
  
  
-#asks the user that login is required
+#asks the user that login is required, flash a message if not logged in
 
 def login_required(test):
  @wraps(test)
@@ -65,7 +65,7 @@ def account():
   ingredients = request.form['ingredients']
   instructions = request.form['instructions']
   dbHandler.insertRecipe(title, ingredients, instructions)
-  
+ #find and select data from the database and show in account page.
  g.db = connect_db()
  cur = g.db.execute("select * from veganfood")
  veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
@@ -73,10 +73,7 @@ def account():
  
  return render_template('account.html', veganfood=veganfood)
 
-
- 
-
-#login with sessions. if loggedin is true go to accountpage, if not go to login.html
+#login with sessions. if loggedin is true go to accountpage, if not go to login page
 @app.route('/login', methods=['GET', 'POST'])
 def login():
  error = None
@@ -92,11 +89,13 @@ def login():
  #DELETE RECIPE
 @app.route('/delete', methods=['POST'])
 def delete_recipe():
-   g.db = connect_db()
-   g.db.execute('delete rowid, from veganfood where rowid =?', (rowid))
-   veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
-   g.db.close()
-   return render_template('account.html', veganfood=veganfood) 
+ if request.form['recipe_to_delete']
+  g.db = connect_db()
+  g.db.execute('delete from veganfood where title =?', [request.form['recipe_to_delete']])
+ #veganfood = [dict(title=row[0], ingredients=row[1], instructions=row[2]) for row in cur.fetchall()]
+  g.b.commit()
+  g.db.close()
+ return render_template('account.html', veganfood=veganfood) 
  
  
 #BREAKFASTS
